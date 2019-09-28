@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const Bob = () => {
-  let charPos = {
+  const [pos, setPos] = useState({
     top: '100px',
     left: '350px'
-  };
+  });
 
   const movement = () => {
-    charPos.top = '150px';
-    charPos.left = '450px';
+    const pos = {
+      top: '150px',
+      left: '450px'
+    };
+
+    setPos(pos);
   };
 
   window.addEventListener('keydown', () => movement(), true);
 
-  return <div style={charPos} className='character bob' />;
+  return <div style={pos} className='character bob' />;
 };
 
 export default Bob;
