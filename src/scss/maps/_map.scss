@@ -9,26 +9,5 @@
     width: 100px;
     height: 100px;
     background: darkred;
-
-    &.t {
-      top: 0;
-    }
-
-    &.r {
-      right: 0;
-    }
-
-    &.b {
-      bottom: 0;
-    }
-
-    &.l {
-      left: 0;
-    }
-  }
-
-  .wall {
-    top: 150px;
-    left: 500px;
   }
 }
