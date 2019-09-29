@@ -4,13 +4,13 @@ const DialogueBox = props => {
   return (
     <div className='dialogue-box'>
       {props.words}
-      <input
-        type='text'
-        name='playerReplay'
-        onChange={props.onChange}
-        value={props.playerReply}
-      />
-      <button onClick={props.setPlayerTalking}>X</button>
+      <div className='btn' onClick={props.setPlayerTalking}>X</div>
+      <div className='player-replies'>
+        <div>REPLY</div>
+        <div>REPLY</div>
+        <div>REPLY</div>
+        <div>REPLY</div>
+      </div>
     </div>
   );
 };
