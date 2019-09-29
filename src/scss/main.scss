@@ -1,6 +1,8 @@
-@import './base/resets';
+@import './abstracts/resets';
+@import './abstracts/base';
 @import './utilities/positions';
 @import './maps/map';
+@import './interaction/dialogue-box';
 @import './buildings/building-components/wall';
 @import './buildings/building-components/wood-floor';
 @import './scenery/greenery';
