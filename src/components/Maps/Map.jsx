@@ -1,8 +1,8 @@
 import React from 'react';
-import Wall from '../Scenery/Wall';
 import Bob from '../Characters/Bob';
 import Shrub from '../Scenery/Shrub';
 import Bush from '../Scenery/Bush';
+import Tavern from '../Buildings/Tavern';
 
 const Map = () => {
   return (
@@ -11,7 +11,7 @@ const Map = () => {
       <div className='corner-marker t r' />
       <div className='corner-marker b l' />
       <div className='corner-marker b r' />
-      <Wall />
+      <Tavern />
       <Bob />
       <Shrub />
       <Bush />

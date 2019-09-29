@@ -1,7 +1,9 @@
 @import './base/resets';
 @import './utilities/positions';
 @import './maps/map';
-@import './scenery/wall';
+@import './buildings/building-components/wall';
+@import './buildings/building-components/wood-floor';
 @import './scenery/greenery';
 @import './characters/character';
 @import './characters/bob';
+@import './characters/tavern-keeper';
