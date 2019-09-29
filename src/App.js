@@ -14,8 +14,7 @@ function App() {
     width: 25,
     height: 25
   });
-
-  let playerTalking;
+  const [playerTalking, setPlayerTalking] = useState(false);
   const characterSize = 25;
 
   const movement = useCallback(
@@ -105,9 +104,20 @@ function App() {
     bl: [npc.top + characterSize, npc.left]
   };
 
-  if (JSON.stringify(playerLocation) === JSON.stringify(npcLocation)) {
-    playerTalking = true;
+  if (
+    JSON.stringify(playerLocation) === JSON.stringify(npcLocation) &&
+    !playerTalking
+  ) {
+    setPlayerTalking(true);
   }
+
+  const closeDialoglue = () => {
+    setPos({
+      top: pos.top + 5,
+      left: pos.left
+    });
+    setPlayerTalking(false);
+  };
 
   return (
     <div className='App'>
@@ -115,6 +125,7 @@ function App() {
         playerStyle={playerStyle}
         npcStyle={npcStyle}
         playerTalking={playerTalking}
+        setPlayerTalking={() => closeDialoglue()}
       />
     </div>
   );
