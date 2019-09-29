@@ -2,27 +2,23 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 const Bob = () => {
   const [pos, setPos] = useState({
-    top: 100,
+    top: 700,
     left: 350
   });
 
   const movement = useCallback(
     e => {
-      e.stopImmediatePropagation();
-      if (e.repeat) {
-        return;
-      }
-
+      const key = e.keyCode;
       const UP = 87;
       const RIGHT = 68;
       const DOWN = 83;
       const LEFT = 65;
-      const key = e.keyCode;
+      const moveAmount = 10;
 
       switch (key) {
         case UP:
           setPos({
-            top: pos.top - 5,
+            top: pos.top - moveAmount,
             left: pos.left
           });
           break;
@@ -30,14 +26,14 @@ const Bob = () => {
         case RIGHT:
           setPos({
             top: pos.top,
-            left: pos.left + 5
+            left: pos.left + moveAmount
           });
 
           break;
 
         case DOWN:
           setPos({
-            top: pos.top + 5,
+            top: pos.top + moveAmount,
             left: pos.left
           });
           break;
@@ -45,7 +41,7 @@ const Bob = () => {
         case LEFT:
           setPos({
             top: pos.top,
-            left: pos.left - 5
+            left: pos.left - moveAmount
           });
           break;
 
