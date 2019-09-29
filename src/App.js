@@ -16,6 +16,7 @@ function App() {
   });
   const [playerTalking, setPlayerTalking] = useState(false);
   const characterSize = 25;
+  const moveAmount = 10;
 
   const movement = useCallback(
     e => {
@@ -24,7 +25,6 @@ function App() {
       const RIGHT = 68;
       const DOWN = 83;
       const LEFT = 65;
-      const moveAmount = 10;
 
       switch (key) {
         case UP:
@@ -113,7 +113,7 @@ function App() {
 
   const closeDialoglue = () => {
     setPos({
-      top: pos.top + 5,
+      top: pos.top + moveAmount,
       left: pos.left
     });
     setPlayerTalking(false);
