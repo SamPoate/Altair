@@ -32,11 +32,11 @@ const Map = props => {
           setPlayerTalking={props.setPlayerTalking}
         />
       ) : null}
-      <Shrub w='100px' h='100px' t='300px' l='700px' />
-      <Shrub w='100px' h='100px' t='400px' l='800px' />
+      <Shrub w='150px' h='150px' t='300px' l='700px' />
+      <Shrub w='125px' h='125px' t='400px' l='800px' />
       <Shrub w='100px' h='100px' t='500px' l='750px' />
       <Shrub w='100px' h='100px' t='600px' l='800px' />
-      <Shrub w='100px' h='100px' t='630px' l='710px' />
+      <Shrub w='110px' h='110px' t='630px' l='710px' />
     </main>
   );
 };
