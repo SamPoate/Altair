@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import './scss/main.scss';
 import Map from './components/Maps/Map';
+import NPCDialogue from './components/Interaction/NPCDialogue';
 
 function App() {
   const [pos, setPos] = useState({
@@ -127,6 +128,7 @@ function App() {
         playerTalking={playerTalking}
         setPlayerTalking={() => closeDialoglue()}
       />
+      <NPCDialogue />
     </div>
   );
 }
