@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 const NPCDialogue = () => {
-  const [dialogueBox, setDialogueBox] = useState(true);
+  const [dialogueBox, setDialogueBox] = useState(false);
 
   if (dialogueBox) {
     return (

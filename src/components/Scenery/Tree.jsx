@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Shrub = props => {
+const Tree = props => {
   const position = {
     top: props.t,
     left: props.l,
@@ -11,4 +11,4 @@ const Shrub = props => {
   return <div style={position} className='scenery shrub'></div>;
 };
 
-export default Shrub;
+export default Tree;
