@@ -26,23 +26,29 @@ function App() {
       const RIGHT = 68;
       const DOWN = 83;
       const LEFT = 65;
-      const player = {
-        x: pos.top,
-        y: pos.left,
-        width: 25,
-        height: 25
-      };
+      const player = document.getElementById('player').getBoundingClientRect();
 
       const map = document.getElementById('map');
-      map.getBoundingClientRect();
 
-      const collideableObjs = Array.from(map.childNodes).map(n =>
-        n.getBoundingClientRect()
-      );
+      const collideableObjs = Array.from(map.childNodes).map(n => {
+        if (n.id === 'player') {
+          return false;
+        } else {
+          if (isCollide(n.getBoundingClientRect(), player)) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      });
 
-      const hitArray = collideableObjs.map(obj => isCollide(obj, player));
-
-      console.log(hitArray);
+      if (collideableObjs.includes(true)) {
+        setPos({
+          top: 250,
+          left: 350
+        });
+        return;
+      }
 
       switch (key) {
         case UP:
