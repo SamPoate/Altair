@@ -7,9 +7,6 @@ const NPCDialogue = () => {
     return (
       <div className='npc-dialogue'>
         <div className='box-inner'>
-          <div className='close' onClick={() => setDialogueBox(false)}>
-            X
-          </div>
           <div className='character-portrait'>
             <img src='/img/characters/bar-wench-male.jpg' alt='barman' />
           </div>
@@ -23,6 +20,7 @@ const NPCDialogue = () => {
           </div>
           <div className='button-box'>
             <button>Next</button>
+            <button onClick={() => setDialogueBox(false)}>Leave</button>
           </div>
         </div>
       </div>
