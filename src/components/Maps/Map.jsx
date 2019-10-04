@@ -17,7 +17,7 @@ const Map = props => {
   }
 
   return (
-    <main className='main-map'>
+    <main id='map' className='main-map'>
       <div className='corner-marker t l' />
       <div className='corner-marker t r' />
       <div className='corner-marker b l' />
@@ -37,6 +37,12 @@ const Map = props => {
       <Tree w='100px' h='100px' t='500px' l='750px' />
       <Tree w='100px' h='100px' t='600px' l='800px' />
       <Tree w='110px' h='110px' t='630px' l='710px' />
+
+      <Tree w='110px' h='110px' t='630px' l='710px' />
+      <Tree w='130px' h='130px' t='230px' l='850px' />
+      <Tree w='125px' h='125px' t='50px' l='650px' />
+      <Tree w='140px' h='140px' t='130px' l='710px' />
+      <Tree w='155px' h='155px' t='50px' l='850px' />
     </main>
   );
 };

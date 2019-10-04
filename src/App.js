@@ -26,6 +26,23 @@ function App() {
       const RIGHT = 68;
       const DOWN = 83;
       const LEFT = 65;
+      const player = {
+        x: pos.top,
+        y: pos.left,
+        width: 25,
+        height: 25
+      };
+
+      const map = document.getElementById('map');
+      map.getBoundingClientRect();
+
+      const collideableObjs = Array.from(map.childNodes).map(n =>
+        n.getBoundingClientRect()
+      );
+
+      const hitArray = collideableObjs.map(obj => isCollide(obj, player));
+
+      console.log(hitArray);
 
       switch (key) {
         case UP:
@@ -33,6 +50,7 @@ function App() {
             top: pos.top - moveAmount,
             left: pos.left
           });
+
           break;
 
         case RIGHT:
@@ -61,8 +79,18 @@ function App() {
           break;
       }
     },
+
     [pos.top, pos.left]
   );
+
+  function isCollide(a, b) {
+    return !(
+      a.y + a.height < b.y ||
+      a.y > b.y + b.height ||
+      a.x + a.width < b.x ||
+      a.x > b.x + b.width
+    );
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', movement);
