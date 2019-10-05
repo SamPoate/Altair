@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const StoneFloor = props => {
   const position = {
@@ -8,7 +8,7 @@ const StoneFloor = props => {
     height: props.h
   };
 
-  return <div style={position} className='stone-floor'></div>;
+  return <div data-collide='no' style={position} className='stone-floor'></div>;
 };
 
 export default StoneFloor;

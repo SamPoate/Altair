@@ -37,9 +37,29 @@ function App() {
         for (let i = 0; i < elementArr.length; i++) {
           if (
             isCollide(elementArr[i].getBoundingClientRect(), player) &&
-            elementArr[i].id !== 'player'
+            elementArr[i].id !== 'player' &&
+            elementArr[i].dataset.collide !== 'no'
           ) {
             hit = true;
+            break;
+          }
+
+          if (elementArr[i].childNodes.length > 0) {
+            const childElementArr = Array.from(elementArr[i].childNodes);
+
+            for (let ci = 0; ci < childElementArr.length; ci++) {
+              if (
+                isCollide(
+                  childElementArr[ci].getBoundingClientRect(),
+                  player
+                ) &&
+                childElementArr[ci].id !== 'player' &&
+                childElementArr[ci].dataset.collide !== 'no'
+              ) {
+                hit = true;
+                break;
+              }
+            }
           }
         }
         return hit;

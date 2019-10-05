@@ -8,7 +8,9 @@ const WoodFloor = props => {
     height: props.h
   };
 
-  return <div style={position} className='wood-floor'></div>;
+  return (
+    <div data-collide={false} style={position} className='wood-floor'></div>
+  );
 };
 
 export default WoodFloor;
