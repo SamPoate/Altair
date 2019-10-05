@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import './scss/main.scss';
 import Map from './components/Maps/Map';
 import NPCDialogue from './components/Interaction/NPCDialogue';
+import update from 'immutability-helper';
 
 function App() {
   const [pos, setPos] = useState({
@@ -30,44 +31,57 @@ function App() {
 
       const map = document.getElementById('map');
 
-      const collideableObjs = Array.from(map.childNodes).map(n => {
-        if (n.id === 'player') {
-          return false;
-        } else {
-          if (isCollide(n.getBoundingClientRect(), player)) {
-            return true;
-          } else {
-            return false;
+      const checkCollision = player => {
+        let hit = false;
+        const elementArr = Array.from(map.childNodes);
+        for (let i = 0; i < elementArr.length; i++) {
+          if (
+            isCollide(elementArr[i].getBoundingClientRect(), player) &&
+            elementArr[i].id !== 'player'
+          ) {
+            hit = true;
           }
         }
-      });
-
-      if (collideableObjs.includes(true)) {
-        setPos({
-          top: 250,
-          left: 350
-        });
-        return;
-      }
+        return hit;
+      };
 
       switch (key) {
         case UP:
+          const u = update(player, {});
+          u.y = u.y - moveAmount;
+
+          if (checkCollision(u)) {
+            break;
+          }
+
           setPos({
             top: pos.top - moveAmount,
             left: pos.left
           });
-
           break;
 
         case RIGHT:
+          const t = update(player, {});
+          t.x = t.x + moveAmount;
+
+          if (checkCollision(t)) {
+            break;
+          }
+
           setPos({
             top: pos.top,
             left: pos.left + moveAmount
           });
-
           break;
 
         case DOWN:
+          const d = update(player, {});
+          d.y = d.y + moveAmount;
+
+          if (checkCollision(d)) {
+            break;
+          }
+
           setPos({
             top: pos.top + moveAmount,
             left: pos.left
@@ -75,6 +89,13 @@ function App() {
           break;
 
         case LEFT:
+          const l = update(player, {});
+          l.x = l.x - moveAmount;
+
+          if (checkCollision(l)) {
+            break;
+          }
+
           setPos({
             top: pos.top,
             left: pos.left - moveAmount
