@@ -7,7 +7,10 @@
   flex-direction: column;
   width: 500px;
   height: calc(100vh - 5px);
-  background: #000;
+  background: url('/img/backgrounds/parchment.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
   z-index: 20;
   border: 2px solid #b78846;
 
@@ -111,7 +114,7 @@
 
     h3,
     p {
-      color: #fffbec;
+      color: #303030;
       margin-bottom: 20px;
     }
 
@@ -136,7 +139,7 @@
     justify-content: center;
 
     button {
-      color: #fffbec;
+      color: #303030;
       background: none;
       border: none;
       outline: none;
@@ -144,7 +147,7 @@
       margin: 0 30px;
 
       &:active {
-        color: #333;
+        color: #fffbec;
       }
     }
   }

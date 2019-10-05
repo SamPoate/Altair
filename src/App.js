@@ -3,6 +3,7 @@ import './scss/main.scss';
 import Map from './components/Maps/Map';
 import NPCDialogue from './components/Interaction/NPCDialogue';
 import update from 'immutability-helper';
+import Inventory from './components/Interaction/Inventory';
 
 function App() {
   const [pos, setPos] = useState({
@@ -16,17 +17,16 @@ function App() {
     width: 25,
     height: 25
   });
-  // const [playerTalking, setPlayerTalking] = useState(false);
   const characterSize = 25;
   const moveAmount = 10;
 
-  const p = document.getElementById('player');
+  const player = document.getElementById('player');
   const tavernKeeper = document.getElementById('tavernKeeper');
   let detectionStyle = {};
   let playerTalking = false;
 
-  if (p && tavernKeeper) {
-    const playerDetection = update(p.getBoundingClientRect(), {});
+  if (player && tavernKeeper) {
+    const playerDetection = update(player.getBoundingClientRect(), {});
     const detectionRadius = 50;
 
     playerDetection.width = characterSize + detectionRadius;
@@ -45,7 +45,6 @@ function App() {
       isCollide(tavernKeeper.getBoundingClientRect(), playerDetection) &&
       !playerTalking
     ) {
-      console.log('hit');
       playerTalking = true;
     } else if (playerTalking) {
       playerTalking = false;
@@ -61,7 +60,9 @@ function App() {
       const LEFT = 65;
       const map = document.getElementById('map');
       const detectionRange = moveAmount;
-      const player = document.getElementById('player').getBoundingClientRect();
+      const playerRect = document
+        .getElementById('player')
+        .getBoundingClientRect();
 
       const checkCollision = player => {
         let hit = false;
@@ -106,7 +107,7 @@ function App() {
 
       switch (key) {
         case UP:
-          const u = update(player, {});
+          const u = update(playerRect, {});
           u.y = u.y - detectionRange;
 
           if (checkCollision(u)) {
@@ -120,7 +121,7 @@ function App() {
           break;
 
         case RIGHT:
-          const t = update(player, {});
+          const t = update(playerRect, {});
           t.x = t.x + detectionRange;
 
           if (checkCollision(t)) {
@@ -134,7 +135,7 @@ function App() {
           break;
 
         case DOWN:
-          const d = update(player, {});
+          const d = update(playerRect, {});
           d.y = d.y + detectionRange;
 
           if (checkCollision(d)) {
@@ -148,7 +149,7 @@ function App() {
           break;
 
         case LEFT:
-          const l = update(player, {});
+          const l = update(playerRect, {});
           l.x = l.x - moveAmount;
 
           if (checkCollision(l)) {
@@ -228,6 +229,7 @@ function App() {
         setPlayerTalking={() => closeDialoglue()}
       />
       <NPCDialogue />
+      <Inventory />
     </div>
   );
 }

@@ -2,6 +2,7 @@
 @import './abstracts/base';
 @import './utilities/positions';
 @import './maps/map';
+@import './interaction/inventory';
 @import './interaction/dialogue-box';
 @import './interaction/npc-dialogue';
 @import './buildings/building-components/wall';
@@ -16,4 +17,21 @@
   position: absolute;
   background: #000;
   opacity: 0.5;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  padding-bottom: 5px;
+  background: #323232;
+  color: antiquewhite;
+  font-size: 22px;
+  cursor: pointer;
+
+  &:active {
+    color: rgb(192, 177, 158);
+  }
 }
