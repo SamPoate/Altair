@@ -24,6 +24,11 @@ const Map = props => {
       <div className='corner-marker b r' />
       <Tavern npcStyle={props.npcStyle} />
       <Bob playerStyle={props.playerStyle} />
+      <div
+        data-avoidcollision
+        className='detection-zone'
+        style={props.detectionStyle}
+      ></div>
       {props.playerTalking ? (
         <DialogueBox
           words={words}
@@ -37,7 +42,6 @@ const Map = props => {
       <Tree w='100px' h='100px' t='500px' l='750px' />
       <Tree w='100px' h='100px' t='600px' l='800px' />
       <Tree w='110px' h='110px' t='630px' l='710px' />
-
       <Tree w='110px' h='110px' t='630px' l='710px' />
       <Tree w='130px' h='130px' t='230px' l='850px' />
       <Tree w='125px' h='125px' t='50px' l='650px' />

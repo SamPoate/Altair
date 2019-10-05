@@ -5,7 +5,7 @@ const NPCDialogue = () => {
 
   if (dialogueBox) {
     return (
-      <div className='npc-dialogue'>
+      <div data-avoidcollision className='npc-dialogue'>
         <div className='box-inner'>
           <div className='character-portrait'>
             <img src='/img/characters/bar-wench-male.jpg' alt='barman' />

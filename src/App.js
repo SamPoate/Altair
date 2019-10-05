@@ -16,9 +16,41 @@ function App() {
     width: 25,
     height: 25
   });
-  const [playerTalking, setPlayerTalking] = useState(false);
+  // const [playerTalking, setPlayerTalking] = useState(false);
   const characterSize = 25;
   const moveAmount = 10;
+
+  const p = document.getElementById('player');
+  const tavernKeeper = document.getElementById('tavernKeeper');
+  let detectionStyle = {};
+  let playerTalking = false;
+
+  if (p && tavernKeeper) {
+    const playerDetection = update(p.getBoundingClientRect(), {});
+    const detectionRadius = 50;
+
+    playerDetection.width = characterSize + detectionRadius;
+    playerDetection.x = playerDetection.x - detectionRadius / 2;
+    playerDetection.height = characterSize + detectionRadius;
+    playerDetection.y = playerDetection.y - detectionRadius / 2;
+
+    detectionStyle = {
+      width: playerDetection.width,
+      height: playerDetection.height,
+      top: playerDetection.y,
+      left: playerDetection.x
+    };
+
+    if (
+      isCollide(tavernKeeper.getBoundingClientRect(), playerDetection) &&
+      !playerTalking
+    ) {
+      console.log('hit');
+      playerTalking = true;
+    } else if (playerTalking) {
+      playerTalking = false;
+    }
+  }
 
   const movement = useCallback(
     e => {
@@ -27,18 +59,24 @@ function App() {
       const RIGHT = 68;
       const DOWN = 83;
       const LEFT = 65;
-      const player = document.getElementById('player').getBoundingClientRect();
-
       const map = document.getElementById('map');
+      const detectionRange = moveAmount;
+      const player = document.getElementById('player').getBoundingClientRect();
 
       const checkCollision = player => {
         let hit = false;
+
+        const mapSize = map.getBoundingClientRect();
+        if (leftMap(mapSize, player)) {
+          return;
+        }
+
         const elementArr = Array.from(map.childNodes);
         for (let i = 0; i < elementArr.length; i++) {
           if (
             isCollide(elementArr[i].getBoundingClientRect(), player) &&
             elementArr[i].id !== 'player' &&
-            elementArr[i].dataset.collide !== 'no'
+            elementArr[i].dataset.avoidcollision !== 'true'
           ) {
             hit = true;
             break;
@@ -49,12 +87,13 @@ function App() {
 
             for (let ci = 0; ci < childElementArr.length; ci++) {
               if (
+                childElementArr[ci].nodeType === 1 &&
                 isCollide(
                   childElementArr[ci].getBoundingClientRect(),
                   player
                 ) &&
                 childElementArr[ci].id !== 'player' &&
-                childElementArr[ci].dataset.collide !== 'no'
+                childElementArr[ci].dataset.avoidcollision !== 'true'
               ) {
                 hit = true;
                 break;
@@ -68,7 +107,7 @@ function App() {
       switch (key) {
         case UP:
           const u = update(player, {});
-          u.y = u.y - moveAmount;
+          u.y = u.y - detectionRange;
 
           if (checkCollision(u)) {
             break;
@@ -82,7 +121,7 @@ function App() {
 
         case RIGHT:
           const t = update(player, {});
-          t.x = t.x + moveAmount;
+          t.x = t.x + detectionRange;
 
           if (checkCollision(t)) {
             break;
@@ -96,7 +135,7 @@ function App() {
 
         case DOWN:
           const d = update(player, {});
-          d.y = d.y + moveAmount;
+          d.y = d.y + detectionRange;
 
           if (checkCollision(d)) {
             break;
@@ -139,6 +178,15 @@ function App() {
     );
   }
 
+  function leftMap(a, b) {
+    return !(
+      a.y + a.height > b.y ||
+      a.y < b.y + b.height ||
+      a.x + a.width > b.x ||
+      a.x < b.x + b.width
+    );
+  }
+
   useEffect(() => {
     window.addEventListener('keydown', movement);
 
@@ -166,33 +214,8 @@ function App() {
     height: characterSize + 'px'
   };
 
-  const playerLocation = {
-    tl: [pos.top, pos.left],
-    tr: [pos.top, pos.left + characterSize],
-    br: [pos.top + characterSize, pos.left + characterSize],
-    bl: [pos.top + characterSize, pos.left]
-  };
-
-  const npcLocation = {
-    tl: [npc.top, npc.left],
-    tr: [npc.top, npc.left + characterSize],
-    br: [npc.top + characterSize, npc.left + characterSize],
-    bl: [npc.top + characterSize, npc.left]
-  };
-
-  if (
-    JSON.stringify(playerLocation) === JSON.stringify(npcLocation) &&
-    !playerTalking
-  ) {
-    setPlayerTalking(true);
-  }
-
   const closeDialoglue = () => {
-    setPos({
-      top: pos.top + moveAmount,
-      left: pos.left
-    });
-    setPlayerTalking(false);
+    playerTalking = false;
   };
 
   return (
@@ -200,6 +223,7 @@ function App() {
       <Map
         playerStyle={playerStyle}
         npcStyle={npcStyle}
+        detectionStyle={detectionStyle}
         playerTalking={playerTalking}
         setPlayerTalking={() => closeDialoglue()}
       />

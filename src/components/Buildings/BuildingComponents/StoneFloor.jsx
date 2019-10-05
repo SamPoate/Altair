@@ -8,7 +8,9 @@ const StoneFloor = props => {
     height: props.h
   };
 
-  return <div data-collide='no' style={position} className='stone-floor'></div>;
+  return (
+    <div data-avoidcollision style={position} className='stone-floor'></div>
+  );
 };
 
 export default StoneFloor;
