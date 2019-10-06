@@ -1,23 +1,19 @@
-import { UPDATE_STATS } from './types';
+import { ADD_TO_CHARACTER, REMOVE_FROM_CHARACTER } from './types';
 
-export const addToInventory = (stat, amount) => async (dispatch, getState) => {
-  const { stats } = getState();
-  let newStat = {};
+export const addToCharacter = item => async dispatch => {
+  dispatch({
+    type: ADD_TO_CHARACTER,
+    payload: item
+  });
+};
 
-  switch (stat) {
-    case 'int':
-      newStat = {
-        stat: stat,
-        amount: stats.int + amount
-      };
-      break;
+export const removeFromCharacter = item => async (dispatch, getState) => {
+  const { character } = getState();
 
-    default:
-      break;
-  }
+  const newItems = character.items.filter(it => it !== item);
 
   dispatch({
-    type: UPDATE_STATS,
-    payload: newStat
+    type: REMOVE_FROM_CHARACTER,
+    payload: newItems
   });
 };

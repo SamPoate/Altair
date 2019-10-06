@@ -1,4 +1,4 @@
-import { ADD_TO_INVENTORY } from '../actions/types';
+import { ADD_TO_INVENTORY, REMOVE_FROM_INVENTORY } from '../actions/types';
 
 const initialState = {
   items: [],
@@ -11,6 +11,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         items: [...state.items, action.payload]
+      };
+
+    case REMOVE_FROM_INVENTORY:
+      return {
+        ...state,
+        items: action.payload
       };
 
     default:

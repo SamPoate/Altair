@@ -5,7 +5,7 @@ import update from 'immutability-helper';
 import './scss/main.scss';
 import Map from './components/Maps/Map';
 import NPCDialogue from './components/Interaction/NPCDialogue';
-import Inventory from './components/Interaction/Inventory';
+import CharacterInfo from './components/Interaction/CharacterInfo';
 import Store from './components/Interaction/Store';
 import ActionBar from './components/Interaction/ActionBar';
 
@@ -13,7 +13,7 @@ const store = configureStore();
 
 function App() {
   const [showDialogueBox, setShowDialogueBox] = useState(false);
-  const [showInventory, setShowInventory] = useState(false);
+  const [showCharacterInfo, setShowCharacterInfo] = useState(true);
   const [showStore, setShowStore] = useState(false);
   const [pos, setPos] = useState({
     top: 300,
@@ -223,7 +223,7 @@ function App() {
       <div className='App'>
         <ActionBar
           dialogue={() => setShowDialogueBox(!showDialogueBox)}
-          inventory={() => setShowInventory(!showInventory)}
+          character={() => setShowCharacterInfo(!showCharacterInfo)}
           store={() => setShowStore(!showStore)}
         />
         <Map
@@ -237,9 +237,9 @@ function App() {
           showDialogueBox={showDialogueBox}
           setShowDialogueBox={() => setShowDialogueBox(!showDialogueBox)}
         />
-        <Inventory
-          showInventory={showInventory}
-          setShowInventory={() => setShowInventory(!showInventory)}
+        <CharacterInfo
+          showCharacterInfo={showCharacterInfo}
+          setShowCharacterInfo={() => setShowCharacterInfo(!showCharacterInfo)}
         />
         <Store
           showStore={showStore}

@@ -1,17 +1,53 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import {
+  addToCharacter,
+  removeFromCharacter
+} from '../../redux/actions/characterActions';
+import {
+  addToInventory,
+  removeFromInventory
+} from '../../redux/actions/inventoryActions';
 
-const Inventory = props => {
+const CharacterInfo = props => {
+  const charSlots = props.character.slots - props.character.items.length;
   const invSlots = props.slots - props.items.length;
-  const itemInt = props.items.map(i => i.int);
+  const itemInt = props.character.items.map(i => i.int);
   const int = props.stats.int + itemInt.reduce((a, b) => a + b, 0);
 
-  if (props.showInventory) {
+  const addToCharacter = item => {
+    if (charSlots !== 0) {
+      props.removeFromInventory(item);
+      props.addToCharacter(item);
+    }
+  };
+
+  const removeFromCharacter = item => {
+    props.addToInventory(item);
+    props.removeFromCharacter(item);
+  };
+
+  if (props.showCharacterInfo) {
     return (
       <div data-avoidcollision className='inventory-container'>
         <div className='box-inner'>
           <div className='character-portrait'>
             <img src='/img/characters/character.jpg' alt='character portrait' />
+          </div>
+          <h3>Character Equipment</h3>
+          <div className='character-equipment'>
+            {props.character.items.map((x, i) => (
+              <div
+                key={i}
+                className='square'
+                onClick={() => removeFromCharacter(x)}
+              >
+                <img src={x.url} alt='' />
+              </div>
+            ))}
+            {[...Array(charSlots)].map((e, i) => (
+              <div key={i} className='square'></div>
+            ))}
           </div>
           <div className='stats'>
             <div className='stat-box'>
@@ -35,9 +71,14 @@ const Inventory = props => {
               <p>{props.stats.wis}</p>
             </div>
           </div>
+          <h3>Inventory</h3>
           <div className='inventory'>
             {props.items.map((it, i) => (
-              <div key={i} className='square'>
+              <div
+                key={i}
+                className='square'
+                onClick={() => addToCharacter(it)}
+              >
                 <img src={it.url} alt='' />
               </div>
             ))}
@@ -62,7 +103,7 @@ const Inventory = props => {
               </p>
             </div>
           </div>
-          <div className='btn' onClick={props.setShowInventory}>
+          <div className='btn' onClick={props.setShowCharacterInfo}>
             Close
           </div>
         </div>
@@ -76,6 +117,7 @@ const Inventory = props => {
 const mapStateToProps = state => ({
   crowns: state.currency.crowns,
   drekels: state.currency.drekels,
+  character: state.character,
   items: state.inventory.items,
   slots: state.inventory.slots,
   stats: state.stats
@@ -83,5 +125,10 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  null
-)(Inventory);
+  {
+    addToCharacter,
+    removeFromCharacter,
+    addToInventory,
+    removeFromInventory
+  }
+)(CharacterInfo);

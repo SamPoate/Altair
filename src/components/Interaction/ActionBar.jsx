@@ -3,8 +3,8 @@ import React from 'react';
 const ActionBar = props => {
   return (
     <div className='action-bar'>
-      <div className='btn' onClick={props.inventory}>
-        Inventory
+      <div className='btn' onClick={props.character}>
+        Character
       </div>
       <div className='btn' onClick={props.store}>
         Store

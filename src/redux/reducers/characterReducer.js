@@ -1,19 +1,22 @@
-import { UPDATE_STATS } from '../actions/types';
+import { ADD_TO_CHARACTER, REMOVE_FROM_CHARACTER } from '../actions/types';
 
 const initialState = {
-  int: 27,
-  str: 3,
-  dex: 1,
-  agi: 2,
-  wis: 7
+  items: [],
+  slots: 7
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_STATS:
+    case ADD_TO_CHARACTER:
       return {
         ...state,
-        [action.stat]: action.amount
+        items: [...state.items, action.payload]
+      };
+
+    case REMOVE_FROM_CHARACTER:
+      return {
+        ...state,
+        items: action.payload
       };
 
     default:
