@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
-const Inventory = () => {
+const Inventory = props => {
+  /*eslint-disable */
   const [showInventory, setShowInventory] = useState(true);
+  const [invSlots, setInvSlots] = useState(34);
+  const [sig, setSig] = useState(78);
+  const [int, setInt] = useState(22);
+  const [str, setStr] = useState(16);
+  /*eslint-enable */
+
+  //Inventory items need to be a list of pictures
+  //URLS picked from an external js inventory library
 
   if (showInventory) {
     return (
@@ -13,11 +23,11 @@ const Inventory = () => {
           <div className='stats'>
             <div className='stat-box'>
               <h6>Str</h6>
-              <p>16</p>
+              <p>{str}</p>
             </div>
             <div className='stat-box'>
               <h6>Int</h6>
-              <p>22</p>
+              <p>{int}</p>
             </div>
             <div className='stat-box'>
               <h6>Dex</h6>
@@ -33,30 +43,27 @@ const Inventory = () => {
             </div>
           </div>
           <div className='inventory'>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
-            <div className='square'></div>
+            <div className='square'>
+              <img src='/img/items/ring.png' alt='ring' />
+            </div>
+            {[...Array(invSlots)].map((e, i) => (
+              <div key={i} className='square'></div>
+            ))}
           </div>
           <div className='currency-container'>
             <div className='currency-box'>
               <p>
-                30 <span>Shek</span>
+                {props.shek} <span>Shek</span>
               </p>
             </div>
             <div className='currency-box'>
               <p>
-                22 <span>Sig</span>
+                {sig} <span>Sig</span>
+              </p>
+            </div>
+            <div className='currency-box rep-box'>
+              <p>
+                22 <span>Bank or Arath Rep</span>
               </p>
             </div>
           </div>
@@ -71,4 +78,11 @@ const Inventory = () => {
   }
 };
 
-export default Inventory;
+const mapStateToProps = state => ({
+  shek: state.currency.shekels
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Inventory);

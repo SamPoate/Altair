@@ -4,6 +4,9 @@ import Map from './components/Maps/Map';
 import NPCDialogue from './components/Interaction/NPCDialogue';
 import update from 'immutability-helper';
 import Inventory from './components/Interaction/Inventory';
+import { Provider } from 'react-redux';
+import configureStore from './redux/store/configureStore';
+const store = configureStore();
 
 function App() {
   const [pos, setPos] = useState({
@@ -220,17 +223,19 @@ function App() {
   };
 
   return (
-    <div className='App'>
-      <Map
-        playerStyle={playerStyle}
-        npcStyle={npcStyle}
-        detectionStyle={detectionStyle}
-        playerTalking={playerTalking}
-        setPlayerTalking={() => closeDialoglue()}
-      />
-      <NPCDialogue />
-      <Inventory />
-    </div>
+    <Provider store={store}>
+      <div className='App'>
+        <Map
+          playerStyle={playerStyle}
+          npcStyle={npcStyle}
+          detectionStyle={detectionStyle}
+          playerTalking={playerTalking}
+          setPlayerTalking={() => closeDialoglue()}
+        />
+        <NPCDialogue />
+        <Inventory />
+      </div>
+    </Provider>
   );
 }
 
