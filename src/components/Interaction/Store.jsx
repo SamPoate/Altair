@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { setDrekels } from '../../redux/actions/currencyActions';
 import { addToInventory } from '../../redux/actions/inventoryActions';
