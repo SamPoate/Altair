@@ -78,39 +78,29 @@ function App() {
 
         const mapSize = map.getBoundingClientRect();
         if (leftMap(mapSize, player)) {
-          return;
+          return hit;
         }
 
-        const elementArr = Array.from(map.childNodes);
-        for (let i = 0; i < elementArr.length; i++) {
-          if (
-            isCollide(elementArr[i].getBoundingClientRect(), player) &&
-            elementArr[i].id !== 'player' &&
-            elementArr[i].dataset.avoidcollision !== 'true'
-          ) {
-            hit = true;
-            break;
+        const hitConditions = curEl =>
+          curEl.nodeType === 1 &&
+          isCollide(curEl.getBoundingClientRect(), player) &&
+          curEl.id !== 'player' &&
+          curEl.dataset.avoidcollision !== 'true';
+
+        hit = Array.from(map.childNodes).some(curEl => {
+          if (hitConditions(curEl)) {
+            return true;
           }
 
-          if (elementArr[i].childNodes.length > 0) {
-            const childElementArr = Array.from(elementArr[i].childNodes);
-
-            for (let ci = 0; ci < childElementArr.length; ci++) {
-              if (
-                childElementArr[ci].nodeType === 1 &&
-                isCollide(
-                  childElementArr[ci].getBoundingClientRect(),
-                  player
-                ) &&
-                childElementArr[ci].id !== 'player' &&
-                childElementArr[ci].dataset.avoidcollision !== 'true'
-              ) {
-                hit = true;
-                break;
-              }
-            }
+          if (Array.from(curEl.childNodes).length > 0) {
+            return Array.from(curEl.childNodes).some(
+              x => x.nodeType === 1 && hitConditions(x)
+            );
           }
-        }
+
+          return false;
+        });
+
         return hit;
       };
 
