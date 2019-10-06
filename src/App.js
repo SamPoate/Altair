@@ -16,7 +16,7 @@ function App() {
   const [showInventory, setShowInventory] = useState(false);
   const [showStore, setShowStore] = useState(false);
   const [pos, setPos] = useState({
-    top: 250,
+    top: 300,
     left: 350
   });
   // eslint-disable-next-line
