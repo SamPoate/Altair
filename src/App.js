@@ -7,10 +7,14 @@ import Map from './components/Maps/Map';
 import NPCDialogue from './components/Interaction/NPCDialogue';
 import Inventory from './components/Interaction/Inventory';
 import Store from './components/Interaction/Store';
+import ActionBar from './components/Interaction/ActionBar';
 
 const store = configureStore();
 
 function App() {
+  const [showDialogueBox, setShowDialogueBox] = useState(false);
+  const [showInventory, setShowInventory] = useState(false);
+  const [showStore, setShowStore] = useState(false);
   const [pos, setPos] = useState({
     top: 250,
     left: 350
@@ -227,6 +231,11 @@ function App() {
   return (
     <Provider store={store}>
       <div className='App'>
+        <ActionBar
+          dialogue={() => setShowDialogueBox(!showDialogueBox)}
+          inventory={() => setShowInventory(!showInventory)}
+          store={() => setShowStore(!showStore)}
+        />
         <Map
           playerStyle={playerStyle}
           npcStyle={npcStyle}
@@ -234,9 +243,18 @@ function App() {
           playerTalking={playerTalking}
           setPlayerTalking={() => closeDialoglue()}
         />
-        <NPCDialogue />
-        <Inventory />
-        <Store />
+        <NPCDialogue
+          showDialogueBox={showDialogueBox}
+          setShowDialogueBox={() => setShowDialogueBox(!showDialogueBox)}
+        />
+        <Inventory
+          showInventory={showInventory}
+          setShowInventory={() => setShowInventory(!showInventory)}
+        />
+        <Store
+          showStore={showStore}
+          setShowStore={() => setShowStore(!showStore)}
+        />
       </div>
     </Provider>
   );

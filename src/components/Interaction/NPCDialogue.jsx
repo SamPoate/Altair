@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const NPCDialogue = () => {
-  const [dialogueBox, setDialogueBox] = useState(false);
-
-  if (dialogueBox) {
+const NPCDialogue = props => {
+  if (props.showDialogueBox) {
     return (
       <div data-avoidcollision className='npc-dialogue'>
         <div className='box-inner'>
@@ -17,7 +15,7 @@ const NPCDialogue = () => {
           </div>
           <div className='button-box'>
             <button>Next</button>
-            <button onClick={() => setDialogueBox(false)}>Leave</button>
+            <button onClick={props.setShowDialogueBox}>Leave</button>
           </div>
         </div>
       </div>

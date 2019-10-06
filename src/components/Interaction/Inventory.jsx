@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 const Inventory = props => {
   /*eslint-disable */
-  const [showInventory, setShowInventory] = useState(true);
   const [invSlots, setInvSlots] = useState(34);
   const [int, setInt] = useState(22);
   const [str, setStr] = useState(16);
@@ -12,7 +11,7 @@ const Inventory = props => {
   //Inventory items need to be a list of pictures
   //URLS picked from an external js inventory library
 
-  if (showInventory) {
+  if (props.showInventory) {
     return (
       <div data-avoidcollision className='inventory-container'>
         <div className='box-inner'>
@@ -68,7 +67,7 @@ const Inventory = props => {
               </p>
             </div>
           </div>
-          <div className='btn' onClick={() => setShowInventory(false)}>
+          <div className='btn' onClick={props.setShowInventory}>
             Close
           </div>
         </div>

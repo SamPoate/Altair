@@ -29,8 +29,6 @@ const items = {
 };
 
 const Store = props => {
-  const [showStore, setShowStore] = useState(true);
-
   const buyItem = item => {
     if (props.drekels >= item.drekels) {
       props.setDrekels(item.drekels);
@@ -38,7 +36,7 @@ const Store = props => {
     }
   };
 
-  if (showStore) {
+  if (props.showStore) {
     return (
       <div data-avoidcollision className='store-container'>
         <div className='box-inner'>
@@ -53,7 +51,7 @@ const Store = props => {
               </div>
             ))}
           </div>
-          <div className='btn' onClick={() => setShowStore(false)}>
+          <div className='btn' onClick={props.setShowStore}>
             Close
           </div>
         </div>
