@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { setDrekels } from '../../redux/actions/currencyAction';
+import { setDrekels } from '../../redux/actions/currencyActions';
+import { addToInventory } from '../../redux/actions/inventoryActions';
 
 const items = {
   rings: [
@@ -31,7 +32,10 @@ const Store = props => {
   const [showStore, setShowStore] = useState(true);
 
   const buyItem = item => {
-    props.setDrekels(item.drekels);
+    if (props.drekels >= item.drekels) {
+      props.setDrekels(item.drekels);
+      props.addToInventory(item);
+    }
   };
 
   if (showStore) {
@@ -60,11 +64,14 @@ const Store = props => {
   }
 };
 
-// const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  drekels: state.currency.drekels
+});
 
 export default connect(
-  null,
+  mapStateToProps,
   {
-    setDrekels
+    setDrekels,
+    addToInventory
   }
 )(Store);

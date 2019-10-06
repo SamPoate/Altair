@@ -42,12 +42,14 @@ const Inventory = props => {
             </div>
           </div>
           <div className='inventory'>
-            <div className='square'>
-              <img src='/img/items/ring.png' alt='ring' />
-            </div>
-            {[...Array(invSlots)].map((e, i) => (
-              <div key={i} className='square'></div>
+            {props.items.map((it, i) => (
+              <div key={i} className='square'>
+                <img src={it.url} alt='' />
+              </div>
             ))}
+            {/* {[...Array(invSlots)].map((e, i) => (
+              <div key={i} className='square'></div>
+            ))} */}
           </div>
           <div className='currency-container'>
             <div className='currency-box'>
@@ -79,7 +81,8 @@ const Inventory = props => {
 
 const mapStateToProps = state => ({
   crowns: state.currency.crowns,
-  drekels: state.currency.drekels
+  drekels: state.currency.drekels,
+  items: state.inventory.items
 });
 
 export default connect(
