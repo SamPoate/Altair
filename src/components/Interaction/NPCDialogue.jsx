@@ -12,11 +12,8 @@ const NPCDialogue = () => {
           </div>
           <div className='text-box'>
             <h3>Male Bar Wench</h3>
-            <p>Welcome to the Shekel Inn.</p>
-            <p>
-              Please come in and give me all your shekels as I need them to save
-              more money.
-            </p>
+            <p>Welcome to the Dekel Inn.</p>
+            <p>Please come in and give me all your Dekels.</p>
           </div>
           <div className='button-box'>
             <button>Next</button>

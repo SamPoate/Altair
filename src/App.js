@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { Provider } from 'react-redux';
+import configureStore from './redux/store/configureStore';
+import update from 'immutability-helper';
 import './scss/main.scss';
 import Map from './components/Maps/Map';
 import NPCDialogue from './components/Interaction/NPCDialogue';
-import update from 'immutability-helper';
 import Inventory from './components/Interaction/Inventory';
-import { Provider } from 'react-redux';
-import configureStore from './redux/store/configureStore';
+import Store from './components/Interaction/Store';
+
 const store = configureStore();
 
 function App() {
@@ -234,6 +236,7 @@ function App() {
         />
         <NPCDialogue />
         <Inventory />
+        <Store />
       </div>
     </Provider>
   );

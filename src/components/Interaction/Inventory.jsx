@@ -5,7 +5,6 @@ const Inventory = props => {
   /*eslint-disable */
   const [showInventory, setShowInventory] = useState(true);
   const [invSlots, setInvSlots] = useState(34);
-  const [sig, setSig] = useState(78);
   const [int, setInt] = useState(22);
   const [str, setStr] = useState(16);
   /*eslint-enable */
@@ -53,17 +52,17 @@ const Inventory = props => {
           <div className='currency-container'>
             <div className='currency-box'>
               <p>
-                {props.shek} <span>Shek</span>
+                {props.crowns} <span>Crowns</span>
               </p>
             </div>
             <div className='currency-box'>
               <p>
-                {sig} <span>Sig</span>
+                {props.drekels} <span>Drekels</span>
               </p>
             </div>
             <div className='currency-box rep-box'>
               <p>
-                22 <span>Bank or Arath Rep</span>
+                22 <span>Arath Rep</span>
               </p>
             </div>
           </div>
@@ -79,7 +78,8 @@ const Inventory = props => {
 };
 
 const mapStateToProps = state => ({
-  shek: state.currency.shekels
+  crowns: state.currency.crowns,
+  drekels: state.currency.drekels
 });
 
 export default connect(

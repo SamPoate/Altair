@@ -1,15 +1,22 @@
-import { SET_SHEKELS } from '../actions/types';
+import { SET_DREKELS, SET_CROWNS } from '../actions/types';
 
 const initialState = {
-  shekels: 25
+  crowns: 1,
+  drekels: 25
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case SET_SHEKELS:
+    case SET_CROWNS:
       return {
         ...state,
-        shekels: action.payload
+        crowns: action.payload
+      };
+
+    case SET_DREKELS:
+      return {
+        ...state,
+        drekels: action.payload
       };
     default:
       return state;

@@ -1,2 +1,2 @@
-export const GET_SHEKELS = 'GET_SHEKELS';
-export const SET_SHEKELS = 'SET_SHEKELS';
+export const SET_DREKELS = 'SET_DREKELS';
+export const SET_CROWNS = 'SET_CROWNS';
