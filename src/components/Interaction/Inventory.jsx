@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 const Inventory = props => {
   /*eslint-disable */
-  const [invSlots, setInvSlots] = useState(34);
-  const [int, setInt] = useState(22);
-  const [str, setStr] = useState(16);
   /*eslint-enable */
-
-  //Inventory items need to be a list of pictures
-  //URLS picked from an external js inventory library
 
   if (props.showInventory) {
     return (
@@ -21,11 +15,11 @@ const Inventory = props => {
           <div className='stats'>
             <div className='stat-box'>
               <h6>Str</h6>
-              <p>{str}</p>
+              <p>{props.stats.str}</p>
             </div>
             <div className='stat-box'>
               <h6>Int</h6>
-              <p>{int}</p>
+              <p>{props.stats.int}</p>
             </div>
             <div className='stat-box'>
               <h6>Dex</h6>
@@ -81,7 +75,8 @@ const Inventory = props => {
 const mapStateToProps = state => ({
   crowns: state.currency.crowns,
   drekels: state.currency.drekels,
-  items: state.inventory.items
+  items: state.inventory.items,
+  stats: state.stats
 });
 
 export default connect(
