@@ -1,7 +1,8 @@
 import { ADD_TO_INVENTORY } from '../actions/types';
 
 const initialState = {
-  items: []
+  items: [],
+  slots: 14
 };
 
 export default function(state = initialState, action) {

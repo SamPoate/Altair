@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const Inventory = props => {
-  /*eslint-disable */
-  /*eslint-enable */
+  const invSlots = props.slots - props.items.length;
+  const itemInt = props.items.map(i => i.int);
+  const int = props.stats.int + itemInt.reduce((a, b) => a + b, 0);
 
   if (props.showInventory) {
     return (
@@ -19,19 +20,19 @@ const Inventory = props => {
             </div>
             <div className='stat-box'>
               <h6>Int</h6>
-              <p>{props.stats.int}</p>
+              <p>{int}</p>
             </div>
             <div className='stat-box'>
               <h6>Dex</h6>
-              <p>3</p>
+              <p>{props.stats.dex}</p>
             </div>
             <div className='stat-box'>
               <h6>Agi</h6>
-              <p>5</p>
+              <p>{props.stats.agi}</p>
             </div>
             <div className='stat-box'>
               <h6>Wis</h6>
-              <p>8</p>
+              <p>{props.stats.wis}</p>
             </div>
           </div>
           <div className='inventory'>
@@ -40,9 +41,9 @@ const Inventory = props => {
                 <img src={it.url} alt='' />
               </div>
             ))}
-            {/* {[...Array(invSlots)].map((e, i) => (
+            {[...Array(invSlots)].map((e, i) => (
               <div key={i} className='square'></div>
-            ))} */}
+            ))}
           </div>
           <div className='currency-container'>
             <div className='currency-box'>
@@ -76,6 +77,7 @@ const mapStateToProps = state => ({
   crowns: state.currency.crowns,
   drekels: state.currency.drekels,
   items: state.inventory.items,
+  slots: state.inventory.slots,
   stats: state.stats
 });
 
